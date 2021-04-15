@@ -24,52 +24,56 @@ This type of visual search task creates new challenges for computer vision algor
 Siamese Mask R-CNN extends Mask R-CNN - a state-of-the-art object detection and segmentation system - with a Siamese backbone and a matching procedure to perform this type of visual search.
 
 ## Installation
+Make sure Tensorflow version is *1.14.0* and Keras is *2.2.4* and make sure the current working directory is `siamese_mask_rcnn_master`.
 
-1. Clone this repository
-2. Prepare COCO dataset as described below
-3. Run the [install_requirements.ipynb](install_requirements.ipynb) notebook to install all relevant dependencies.
+## Download Pretrained Weights
 
-### Requirements
-
-Linux, Python 3.4+, Tensorflow, Keras 2.1.6, cython, scikit_image 0.13.1, h5py, imgaug and opencv_python
-
-### Prepare COCO dataset
-
-The model requires [MS COCO](http://cocodataset.org/#home) and the [CocoAPI](https://github.com/waleedka/coco) to be added to `/data`.
-```
-cd data
-git clone https://github.com/cocodataset/cocoapi.git
-```
-It is recommended to symlink the dataset root of MS COCO. 
-```
-ln -s $PATH_TO_COCO$/coco coco
-```
-If unsure follow the instructions of the [Matterport Mask R-CNN implementation](https://github.com/matterport/Mask_RCNN#ms-coco-requirements).
-
-### Get pretrained weights
-
-Get the pretrained weights from the [releases menu](https://github.com/bethgelab/siamese-mask-rcnn/releases) and save them to `/checkpoints`.
+Get the pretrained weights from the [releases menu](https://github.com/bethgelab/siamese-mask-rcnn/releases) and save them to `/checkpoints` in the main directory.
+Your `/checkpoints` should have the following files:
+- imagenet_687.h5
+- large_siamese_mrcnn_coco_full_0320.h5
+- small_siamese_mrcnn_0160.h5
 
 ## Training
 
 To train siamese mask r-cnn on MS COCO simply follow the instructions in the [training.ipynb](training.ipynb) notebook. 
-There are two model configs available, a small one which runs on a single GPU with 12GB memory and a large one which needs 4 GPUs with 12GB memory each.
-The second model config is the same as used in our experiments.
-
-To reproduce our results and train the models reported in the paper run the notebooks provided in [experiments](experiments). 
-Those models need 4 GPUs with 12GB memory each.
+To train without issues, make sure the argument *auto_download* is set to *True*. This will download the train2017 and val2017 folders for you.
 
 Our models are trained on the coco 2017 training set, of which we remove the last 3000 images for validation.
 
+If run correctly, you should see the following loss plot.
+
+
+<p align="center">
+ <img src="figures/loss.png" width=50%>
+</p>
+
 ## Evaluation
 
-To evaluate and visualize a models results run the [evaluation.ipynb](evaluation.ipynb) notebook. Make sure to use the same config as used for training the model.
-
-To evaluate the models reported in the paper run the evaluation notebook provided in [experiments](experiments). 
-Each model will be evaluated 5 times to compensate for the stochastic effects introduced by randomly choosing the reference instances. 
-The final result is the mean of those five runs.
+To evaluate and visualize a models results run the [evaluation.ipynb](evaluation.ipynb) notebook.
 
 We use the coco 2017 val set for testing and the last 3000 images from the training set for validation.
+
+If run correctly, you should see the following results.
+
+<p align="center">
+ <img src="figures/results_segmentation.JPG" width=50%>
+</p>
+
+## Visualization
+
+To visualize layers, kernels and feature maps of the ResNet50 backbone, run the [visualize.ipynb](visualize.ipynb) notebook.
+
+If run correctly, you should see the following results.
+
+<p align="center">
+ <img src="figures/filters.JPG" width=50%>
+</p>
+
+The following is the output for the feature maps.
+<p align="center">
+ <img src="figures/feature_maps.JPG" width=50%>
+</p>
 
 ## Model description
 
@@ -83,7 +87,7 @@ Siamese Mask R-CNN is designed as a minimal variation of Mask R-CNN which can pe
 ## Citation
 
 If you use this repository or want to reference our work please cite our paper:
-```
+
 @article{michaelis_one-shot_2018,
     title = {One-Shot Instance Segmentation},
     author = {Michaelis, Claudio and Ustyuzhaninov, Ivan and Bethge, Matthias and Ecker, Alexander S.},
@@ -91,4 +95,3 @@ If you use this repository or want to reference our work please cite our paper:
     journal = {arXiv},
     url = {http://arxiv.org/abs/1811.11507}
 }
-```

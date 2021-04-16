@@ -154,7 +154,7 @@ model = siamese_model.SiameseMaskRCNN(mode="training", model_dir=MODEL_DIR, conf
 # Check if both folders under 'logs' folder are empty before running model.train
 train_schedule = OrderedDict()
 train_schedule[1] = {"learning_rate": config.LEARNING_RATE, "layers": "heads"}
-train_schedule[50] = {"learning_rate": config.LEARNING_RATE, "layers": "all"}
+train_schedule[10] = {"learning_rate": config.LEARNING_RATE, "layers": "all"}
 
 # Load weights trained on Imagenet
 try: 

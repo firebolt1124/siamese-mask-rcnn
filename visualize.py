@@ -71,7 +71,7 @@ train_classes = np.array(range(1,81))
 
 # Load COCO/val dataset
 coco_val = siamese_utils.IndexedCocoDataset()
-coco_object = coco_val.load_coco(COCO_DATA, "val", year="2017_80", return_coco=True)
+coco_object = coco_val.load_coco(COCO_DATA, "val", year="2017", return_coco=True)
 coco_val.prepare()
 coco_val.build_indices()
 coco_val.ACTIVE_CLASSES = train_classes

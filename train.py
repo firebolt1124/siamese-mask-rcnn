@@ -62,7 +62,7 @@ train_classes = np.array(range(1,81))
 
 # Load COCO/val dataset
 coco_val = siamese_utils.IndexedCocoDataset()
-coco_object = coco_val.load_coco(COCO_DATA, "val", year="2017",return_coco=True)
+coco_object = coco_val.load_coco(COCO_DATA, "val", year="2017",return_coco=True, auto_download = True)
 coco_object.getCatIds()
 coco_val.prepare()
 coco_val.build_indices()
@@ -141,7 +141,7 @@ model = siamese_model.SiameseMaskRCNN(mode="training", model_dir=MODEL_DIR, conf
 # Check if both folders under 'logs' folder are empty before running model.train
 train_schedule = OrderedDict()
 train_schedule[1] = {"learning_rate": config.LEARNING_RATE, "layers": "heads"}
-train_schedule[3] = {"learning_rate": config.LEARNING_RATE, "layers": "all"}
+train_schedule[30] = {"learning_rate": config.LEARNING_RATE, "layers": "all"}
 
 # Load weights trained on Imagenet
 try: 

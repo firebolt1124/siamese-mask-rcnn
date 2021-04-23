@@ -41,7 +41,14 @@ To train without issues, make sure the argument *auto_download* is set to *True*
 
 Our models are trained on the coco 2017 training set, of which we remove the last 3000 images for validation.
 
-If run correctly, you should see the following loss plot.
+If run correctly, you should see the following map50 plot,
+
+
+<p align="center">
+ <img src="figures/map50.png" width=50%>
+</p>
+
+Along with the following loss plot.
 
 
 <p align="center">

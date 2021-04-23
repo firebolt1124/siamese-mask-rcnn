@@ -45,7 +45,7 @@ If run correctly, you should see the following map50 plot,
 
 
 <p align="center">
- <img src="figures/map50.png" width=50%>
+ <img src="figures/map50.jpg" width=50%>
 </p>
 
 Along with the following loss plot.
